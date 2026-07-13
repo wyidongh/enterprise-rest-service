@@ -2,6 +2,7 @@
 
 set -Eeuo pipefail
 
+git config --global --add safe.directory /workspace
 
 PROJECT_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
