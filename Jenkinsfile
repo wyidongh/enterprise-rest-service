@@ -29,35 +29,44 @@ pipeline {
 
 
 
-        stage('Build') {
+	stage('Build') {
 
-            steps {
+	    steps {
 
-                echo "Compile C++ project"
-
-                sh """
-                    ./scripts/build.sh
-                """
-
-            }
-        }
+		echo "Compile inside cpp-ci container"
 
 
+		sh """
+		docker run --rm \
+		    -v ${WORKSPACE}:/workspace \
+		    -w /workspace \
+		    cpp-ci:build-2.0 \
+		    bash -c "./scripts/build.sh"
+		"""
 
-        stage('Package') {
-
-            steps {
-
-                echo "Create artifact"
-
-                sh """
-                    ./scripts/package.sh
-                """
-
-            }
-        }
+	    }
+	}
 
 
+	stage('Package') {
+
+	    steps {
+
+		echo "Package artifact"
+
+
+		sh """
+
+		docker run --rm \
+		    -v ${WORKSPACE}:/workspace \
+		    -w /workspace \
+		    cpp-ci:build-2.0 \
+		    bash -c "./scripts/package.sh"
+
+		"""
+
+	    }
+	}
 
         stage('Archive Artifact') {
 
