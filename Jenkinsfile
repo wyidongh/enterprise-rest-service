@@ -28,7 +28,6 @@ pipeline {
         }
 
 
-
 	stage('Build') {
 
 	    steps {
@@ -37,11 +36,13 @@ pipeline {
 
 
 		sh """
+
 		docker run --rm \
-		    -v ${WORKSPACE}:/workspace \
+		    -v /home/dong/devops/jenkins_home/workspace/${JOB_NAME}:/workspace \
 		    -w /workspace \
 		    cpp-ci:build-2.0 \
-		    bash -c "./scripts/build.sh"
+		    bash -c './scripts/build.sh'
+
 		"""
 
 	    }
@@ -58,10 +59,10 @@ pipeline {
 		sh """
 
 		docker run --rm \
-		    -v ${WORKSPACE}:/workspace \
+		    -v /home/dong/devops/jenkins_home/workspace/${JOB_NAME}:/workspace \
 		    -w /workspace \
 		    cpp-ci:build-2.0 \
-		    bash -c "./scripts/package.sh"
+		    bash -c './scripts/package.sh'
 
 		"""
 
