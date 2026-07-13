@@ -1,0 +1,5 @@
+if(EXISTS "/home/dong/devops/temp/enterprise-rest-service/build/version_test[1]_tests.cmake")
+  include("/home/dong/devops/temp/enterprise-rest-service/build/version_test[1]_tests.cmake")
+else()
+  add_test(version_test_NOT_BUILT version_test_NOT_BUILT)
+endif()
