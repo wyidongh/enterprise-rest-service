@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/enterprise-service.dir/link.d "CMakeFiles/enterprise-service.dir/src/main.cpp.o" -o enterprise-service

@@ -1,0 +1,12 @@
+# CMake
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Runtime
+*.log
+
+# Package
+*.tar.gz
