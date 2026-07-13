@@ -101,7 +101,7 @@ echo
 
 ls -lh ${PACKAGE_NAME}.tar.gz
 
-ARTIFACT_DIR=${PROJECT_ROOT}/../artifacts
+ARTIFACT_DIR=${PROJECT_ROOT}/artifacts
 
 
 mkdir -p ${ARTIFACT_DIR}
