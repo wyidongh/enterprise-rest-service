@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-URL=http://localhost:8090/health
+URL=http://localhost:8080/health
 
 
 echo "Checking service health..."

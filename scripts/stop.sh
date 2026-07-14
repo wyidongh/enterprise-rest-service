@@ -1,15 +1,45 @@
 #!/bin/bash
 
-PID=$(pgrep -f enterprise-service)
+set -e
 
-if [ -n "$PID" ]
+
+APP_HOME=$(cd "$(dirname "$0")/.." && pwd)
+
+PID_FILE=$APP_HOME/run/service.pid
+
+
+if [ ! -f $PID_FILE ]
 then
-    echo "Stopping enterprise-service PID=$PID"
+    echo "No PID file"
+    exit 0
+fi
+
+
+PID=$(cat $PID_FILE)
+
+
+if ps -p $PID > /dev/null
+then
+
+    echo "Stopping service PID=$PID"
 
     kill $PID
 
-    sleep 2
 
-else
-    echo "Service not running"
+    for i in {1..10}
+    do
+        if ps -p $PID > /dev/null
+        then
+            sleep 1
+        else
+            break
+        fi
+    done
+
 fi
+
+
+rm -f $PID_FILE
+
+
+echo "Service stopped"

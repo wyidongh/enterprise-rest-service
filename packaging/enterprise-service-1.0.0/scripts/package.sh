@@ -25,7 +25,7 @@ rm -rf ${PACKAGE_DIR}
 mkdir -p ${PACKAGE_DIR}/bin
 mkdir -p ${PACKAGE_DIR}/config
 mkdir -p ${PACKAGE_DIR}/scripts
-mkdir -p ${PACKAGE_DIR}/run
+
 
 ################################
 # Binary
