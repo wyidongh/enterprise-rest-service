@@ -50,17 +50,7 @@ ${PACKAGE_DIR}/config/
 ################################
 
 cp \
-${PROJECT_ROOT}/scripts/install.sh \
-${PACKAGE_DIR}/scripts/
-
-
-cp \
-${PROJECT_ROOT}/scripts/uninstall.sh \
-${PACKAGE_DIR}/scripts/
-
-
-cp \
-${PROJECT_ROOT}/scripts/health_check.sh \
+${PROJECT_ROOT}/scripts/*.sh \
 ${PACKAGE_DIR}/scripts/
 
 

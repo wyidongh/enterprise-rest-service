@@ -69,6 +69,26 @@ pipeline {
 	    }
 	}
 
+
+	stage('Verify Artifact') {
+
+	    steps {
+
+		sh '''
+		echo "Verify artifact content"
+
+		tar tzf artifacts/*.tar.gz
+
+		echo "Check stop.sh"
+
+		tar tzf artifacts/*.tar.gz | grep scripts/stop.sh
+
+		'''
+
+	    }
+
+	}
+
         stage('Archive Artifact') {
 
             steps {
