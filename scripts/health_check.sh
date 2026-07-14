@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
 
+set -e
 
-if ps aux | grep enterprise-service | grep -v grep
+
+URL=http://localhost:8080/health
+
+
+echo "Checking service health..."
+
+response=$(curl -s $URL)
+
+
+echo "Response:"
+echo $response
+
+
+if echo "$response" | grep -q '"status":"ok"'
 then
-    echo "Service OK"
+    echo "Health Check PASSED"
     exit 0
 else
-    echo "Service DOWN"
+    echo "Health Check FAILED"
     exit 1
 fi

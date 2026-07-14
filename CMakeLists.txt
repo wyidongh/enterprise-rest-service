@@ -1,4 +1,8 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(
+	VERSION 3.20
+	FATAL_ERROR
+	)
+cmake_policy(VERSION 3.20)
 
 project(
     EnterpriseRestService
@@ -11,26 +15,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
+
 ################################
-# Application
+# Dependencies
 ################################
 
-add_executable(
-    enterprise-service
-    src/main.cpp
-)
-
+include(FetchContent)
 
 
 ################################
 # GoogleTest
 ################################
-
-enable_testing()
-
-
-include(FetchContent)
-
 
 FetchContent_Declare(
     googletest
@@ -39,6 +34,58 @@ FetchContent_Declare(
 
 
 FetchContent_MakeAvailable(googletest)
+
+
+
+################################
+# Pistache
+################################
+
+
+################################
+# Pistache HTTP Framework
+################################
+
+include(FetchContent)
+
+set(PISTACHE_BUILD_TESTS OFF CACHE BOOL "Disable Pistache tests" FORCE)
+set(BUILD_TESTING OFF CACHE BOOL "Disable all tests" FORCE)
+
+FetchContent_Declare(
+    pistache
+    GIT_REPOSITORY https://github.com/pistacheio/pistache.git
+    GIT_TAG v0.4.26
+)
+
+
+FetchContent_MakeAvailable(pistache)
+
+
+################################
+# Application
+################################
+
+
+add_executable(
+    enterprise-service
+    src/main.cpp
+)
+
+
+target_link_libraries(
+    enterprise-service
+    PRIVATE
+    pistache
+)
+
+
+
+################################
+# Tests
+################################
+
+
+enable_testing()
 
 
 add_executable(
@@ -67,3 +114,4 @@ install(
     TARGETS enterprise-service
     DESTINATION bin
 )
+
