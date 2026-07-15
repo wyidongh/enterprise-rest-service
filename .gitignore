@@ -10,3 +10,7 @@ build/
 
 # Package
 *.tar.gz
+
+build/
+packaging/
+artifacts/

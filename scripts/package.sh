@@ -2,7 +2,6 @@
 
 set -Eeuo pipefail
 
-git config --global --add safe.directory /workspace
 
 PROJECT_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
@@ -58,9 +57,9 @@ ${PACKAGE_DIR}/scripts/
 # Build Info
 ################################
 
-GIT_COMMIT=$(git rev-parse HEAD)
+GIT_COMMIT=$(git -c safe.directory=/workspace rev-parse HEAD)
 
-GIT_BRANCH=$(git branch --show-current)
+GIT_BRANCH=$(git -c safe.directory=/workspace branch --show-current)
 
 
 cat > ${PACKAGE_DIR}/build_info.json <<EOF
