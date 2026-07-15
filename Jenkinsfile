@@ -44,7 +44,7 @@ pipeline {
 		echo "Compile inside cpp-ci container"
 
 
-		sh """
+		sh '''
 
 		docker run --rm \
 		    --user $(id -u):$(id -g) \
@@ -53,7 +53,7 @@ pipeline {
 		    cpp-ci:build-2.0 \
 		    bash -c './scripts/build.sh'
 
-		"""
+		'''
 
 	    }
 	}
@@ -66,7 +66,7 @@ pipeline {
 		echo "Package artifact"
 
 
-		sh """
+		sh '''
 
 		docker run --rm \
 		    --user $(id -u):$(id -g) \
@@ -75,7 +75,7 @@ pipeline {
 		    cpp-ci:build-2.0 \
 		    bash -c './scripts/package.sh'
 
-		"""
+		'''
 
 	    }
 	}
