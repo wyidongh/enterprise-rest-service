@@ -2,6 +2,9 @@ pipeline {
 
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
 
     environment {
 
@@ -121,7 +124,8 @@ pipeline {
         success {
 
             echo "Pipeline A SUCCESS"
-
+	    build job:'pipeline_test',
+	          wait:false
         }
 
 
