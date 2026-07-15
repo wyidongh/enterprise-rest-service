@@ -17,13 +17,22 @@ pipeline {
 
     stages {
 
+	stage('Clean Workspace') {
+
+	steps {
+
+	deleteDir()
+
+	}
+
+	}
+
 
         stage('Checkout') {
 
             steps {
 
-                echo "Checkout source code"
-
+		checkout scm
             }
         }
 
@@ -38,6 +47,7 @@ pipeline {
 		sh """
 
 		docker run --rm \
+		    --user $(id -u):$(id -g) \
 		    -v /home/dong/devops/jenkins_home/workspace/${JOB_NAME}:/workspace \
 		    -w /workspace \
 		    cpp-ci:build-2.0 \
@@ -59,6 +69,7 @@ pipeline {
 		sh """
 
 		docker run --rm \
+		    --user $(id -u):$(id -g) \
 		    -v /home/dong/devops/jenkins_home/workspace/${JOB_NAME}:/workspace \
 		    -w /workspace \
 		    cpp-ci:build-2.0 \
